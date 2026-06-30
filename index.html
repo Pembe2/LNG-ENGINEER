@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LNG Distribution Engineer Flashcards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      color: #222;
+    }
+
+    .app {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .card {
+      border: 2px solid #ddd;
+      border-radius: 14px;
+      padding: 28px;
+      min-height: 180px;
+      margin: 20px 0;
+      background: #fafafa;
+      cursor: pointer;
+    }
+
+    .label {
+      font-size: 13px;
+      color: #666;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .question, .answer {
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    button, select, input, textarea {
+      font-size: 16px;
+      padding: 10px;
+      margin: 5px 4px 5px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      cursor: pointer;
+      background: #1f5eff;
+      color: white;
+      border: none;
+    }
+
+    button.secondary {
+      background: #555;
+    }
+
+    button.good {
+      background: #16803c;
+    }
+
+    button.bad {
+      background: #b42318;
+    }
+
+    .controls, .editor {
+      margin-top: 18px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 80px;
+      box-sizing: border-box;
+    }
+
+    .stats {
+      margin-top: 12px;
+      color: #555;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>LNG Distribution Engineer Flashcards</h1>
+
+    <select id="categoryFilter" onchange="filterCards()">
+      <option value="All">All Categories</option>
+    </select>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="card" onclick="flipCard()">
+      <div class="label" id="cardLabel">Question</div>
+      <div class="question" id="cardText"></div>
+    </div>
+
+    <div class="controls">
+      <button onclick="prevCard()" class="secondary">Previous</button>
+      <button onclick="flipCard()">Flip</button>
+      <button onclick="nextCard()" class="secondary">Next</button>
+      <button onclick="shuffleCards()">Shuffle</button>
+    </div>
+
+    <div class="controls">
+      <button class="bad" onclick="markCard('Needs Review')">Needs Review</button>
+      <button class="good" onclick="markCard('Known')">Known</button>
+    </div>
+
+    <hr />
+
+    <h2>Add New Card</h2>
+    <div class="editor">
+      <input id="newCategory" placeholder="Category, e.g. Cryogenics" />
+      <textarea id="newQuestion" placeholder="Question"></textarea>
+      <textarea id="newAnswer" placeholder="Answer"></textarea>
+      <button onclick="addCard()">Add Card</button>
+      <button class="secondary" onclick="exportCards()">Export Deck</button>
+      <input type="file" id="importFile" onchange="importCards(event)" />
+    </div>
+
+    <p class="small">
+      Cards are saved in your browser using localStorage. Use Export Deck to back them up.
+    </p>
+  </div>
+
+  <script>
+    const starterCards = [
+      {
+        category: "LNG Basics",
+        question: "What is LNG?",
+        answer: "Liquefied Natural Gas. Natural gas, mostly methane, cooled to about -162°C or -260°F so it becomes liquid and occupies much less volume.",
+        status: ""
+      },
+      {
+        category: "LNG Basics",
+        question: "Why is natural gas liquefied?",
+        answer: "Liquefaction reduces volume by roughly 600:1, making storage and transport more practical.",
+        status: ""
+      },
+      {
+        category: "Cryogenics",
+        question: "Why is LNG considered cryogenic?",
+        answer: "Because it is stored and handled at extremely low temperatures, around -162°C / -260°F.",
+        status: ""
+      },
+      {
+        category: "Safety",
+        question: "What is the main fire hazard of LNG?",
+        answer: "The liquid itself is not flammable, but vaporized natural gas can ignite when mixed with air in the flammable range and exposed to an ignition source.",
+        status: ""
+      },
+      {
+        category: "Safety",
+        question: "What is methane’s approximate flammable range in air?",
+        answer: "About 5% to 15% methane by volume in air.",
+        status: ""
+      },
+      {
+        category: "Distribution",
+        question: "What is odorization and why is it important?",
+        answer: "Odorization adds a strong-smelling compound to natural gas so leaks can be detected by smell. LNG itself is typically odorless before vaporization and distribution.",
+        status: ""
+      },
+      {
+        category: "Equipment",
+        question: "What does a vaporizer do in an LNG system?",
+        answer: "It adds heat to LNG so the liquid converts back into natural gas for distribution or use.",
+        status: ""
+      },
+      {
+        category: "Equipment",
+        question: "What is boil-off gas?",
+        answer: "Gas produced when heat leaks into an LNG tank, causing a small portion of the LNG to vaporize.",
+        status: ""
+      },
+      {
+        category: "Storage",
+        question: "Why do LNG tanks need pressure control?",
+        answer: "Heat ingress creates boil-off gas, which can raise tank pressure if not managed.",
+        status: ""
+      },
+      {
+        category: "Codes & Standards",
+        question: "What types of codes should an LNG distribution engineer become familiar with?",
+        answer: "Common areas include LNG facility design, pressure piping, fire protection, process safety, gas distribution rules, and local permitting requirements.",
+        status: ""
+      },
+      {
+        category: "Operations",
+        question: "What is peak shaving in LNG distribution?",
+        answer: "Storing LNG during low-demand periods and vaporizing it during high-demand periods to supplement pipeline gas supply.",
+        status: ""
+      },
+      {
+        category: "Process",
+        question: "What happens during regasification?",
+        answer: "LNG is warmed and converted from liquid back into gaseous natural gas.",
+        status: ""
+      }
+    ];
+
+    let cards = JSON.parse(localStorage.getItem("lngFlashcards")) || starterCards;
+    let filteredCards = [...cards];
+    let currentIndex = 0;
+    let showingAnswer = false;
+
+    function saveCards() {
+      localStorage.setItem("lngFlashcards", JSON.stringify(cards));
+    }
+
+    function populateCategories() {
+      const select = document.getElementById("categoryFilter");
+      const current = select.value;
+      const categories = ["All", ...new Set(cards.map(c => c.category))];
+
+      select.innerHTML = "";
+      categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        select.appendChild(option);
+      });
+
+      select.value = categories.includes(current) ? current : "All";
+    }
+
+    function filterCards() {
+      const category = document.getElementById("categoryFilter").value;
+      filteredCards = category === "All"
+        ? [...cards]
+        : cards.filter(c => c.category === category);
+
+      currentIndex = 0;
+      showingAnswer = false;
+      renderCard();
+    }
+
+    function renderCard() {
+      populateCategories();
+
+      if (filteredCards.length === 0) {
+        document.getElementById("cardLabel").textContent = "No Cards";
+        document.getElementById("cardText").textContent = "Add a card to begin.";
+        document.getElementById("stats").textContent = "";
+        return;
+      }
+
+      const card = filteredCards[currentIndex];
+      document.getElementById("cardLabel").textContent =
+        showingAnswer ? "Answer" : `Question — ${card.category}`;
+
+      document.getElementById("cardText").textContent =
+        showingAnswer ? card.answer : card.question;
+
+      document.getElementById("stats").textContent =
+        `Card ${currentIndex + 1} of ${filteredCards.length} | Status: ${card.status || "Unmarked"}`;
+    }
+
+    function flipCard() {
+      showingAnswer = !showingAnswer;
+      renderCard();
+    }
+
+    function nextCard() {
+      currentIndex = (currentIndex + 1) % filteredCards.length;
+      showingAnswer = false;
+      renderCard();
+    }
+
+    function prevCard() {
+      currentIndex = (currentIndex - 1 + filteredCards.length) % filteredCards.length;
+      showingAnswer = false;
+      renderCard();
+    }
+
+    function shuffleCards() {
+      for (let i = filteredCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [filteredCards[i], filteredCards[j]] = [filteredCards[j], filteredCards[i]];
+      }
+      currentIndex = 0;
+      showingAnswer = false;
+      renderCard();
+    }
+
+    function markCard(status) {
+      const card = filteredCards[currentIndex];
+      const original = cards.find(c =>
+        c.question === card.question &&
+        c.answer === card.answer &&
+        c.category === card.category
+      );
+
+      if (original) {
+        original.status = status;
+        saveCards();
+      }
+
+      nextCard();
+    }
+
+    function addCard() {
+      const category = document.getElementById("newCategory").value.trim();
+      const question = document.getElementById("newQuestion").value.trim();
+      const answer = document.getElementById("newAnswer").value.trim();
+
+      if (!category || !question || !answer) {
+        alert("Please fill in category, question, and answer.");
+        return;
+      }
+
+      cards.push({ category, question, answer, status: "" });
+      saveCards();
+
+      document.getElementById("newCategory").value = "";
+      document.getElementById("newQuestion").value = "";
+      document.getElementById("newAnswer").value = "";
+
+      filterCards();
+    }
+
+    function exportCards() {
+      const data = JSON.stringify(cards, null, 2);
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "lng-flashcards.json";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    function importCards(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (!Array.isArray(imported)) throw new Error("Invalid deck format.");
+
+          cards = imported;
+          saveCards();
+          filterCards();
+          alert("Deck imported successfully.");
+        } catch {
+          alert("Could not import deck. Make sure it is a valid JSON flashcard file.");
+        }
+      };
+
+      reader.readAsText(file);
+    }
+
+    renderCard();
+  </script>
+</body>
+</html>
