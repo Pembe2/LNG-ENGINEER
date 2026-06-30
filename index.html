@@ -263,67 +263,985 @@
 
   <script>
     const starterCards = [
-      {
-        category: "LNG Basics",
-        question: "What does LNG stand for?",
-        answer: "Liquefied Natural Gas.",
-        status: ""
-      },
-      {
-        category: "LNG Basics",
-        question: "Why is natural gas liquefied?",
-        answer: "Liquefaction reduces natural gas volume by about 600:1, making storage and transport more practical.",
-        status: ""
-      },
-      {
-        category: "Cryogenics",
-        question: "At approximately what temperature is LNG stored?",
-        answer: "About -162°C or -260°F at near-atmospheric pressure.",
-        status: ""
-      },
-      {
-        category: "Safety",
-        question: "Is liquid LNG itself flammable?",
-        answer: "No. The liquid is not flammable, but vaporized natural gas can ignite when mixed with air in the flammable range.",
-        status: ""
-      },
-      {
-        category: "Safety",
-        question: "What is methane’s approximate flammable range in air?",
-        answer: "Roughly 5% to 15% methane by volume in air.",
-        status: ""
-      },
-      {
-        category: "Storage Tanks",
-        question: "What is boil-off gas?",
-        answer: "Boil-off gas is vapor created when heat leaks into an LNG tank and causes some LNG to evaporate.",
-        status: ""
-      },
-      {
-        category: "Vaporizers",
-        question: "What does an LNG vaporizer do?",
-        answer: "It adds heat to LNG so it converts from liquid back into natural gas.",
-        status: ""
-      },
-      {
-        category: "Distribution",
-        question: "What is odorization?",
-        answer: "The addition of odorant to natural gas so leaks can be detected by smell.",
-        status: ""
-      },
-      {
-        category: "Piping",
-        question: "Why are thermal relief valves important in LNG piping?",
-        answer: "They protect trapped liquid sections from dangerous pressure rise as LNG warms and expands.",
-        status: ""
-      },
-      {
-        category: "Codes & Standards",
-        question: "What is 49 CFR Part 193?",
-        answer: "U.S. federal safety standards for LNG facilities used in pipeline gas transportation.",
-        status: ""
-      }
-    ];
+  {
+    "category": "LNG Basics",
+    "question": "What does LNG stand for?",
+    "answer": "Liquefied Natural Gas.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "What is LNG primarily made of?",
+    "answer": "LNG is primarily methane, with smaller amounts of ethane, propane, nitrogen, and other hydrocarbons depending on the gas source.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "Why is natural gas liquefied?",
+    "answer": "Liquefaction reduces the volume of natural gas by about 600:1, making storage and transport much more practical.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "At approximately what temperature is natural gas liquefied?",
+    "answer": "About -162°C or -260°F at near-atmospheric pressure.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "Is liquid LNG itself flammable?",
+    "answer": "No. The liquid is not flammable, but the vaporized natural gas can ignite when mixed with air in the flammable range.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "What is regasification?",
+    "answer": "Regasification is the process of warming LNG so it changes from liquid back into natural gas.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "What is peak shaving?",
+    "answer": "Peak shaving is storing LNG during low-demand periods and vaporizing it during high-demand periods to supplement pipeline gas supply.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "What is an LNG satellite plant?",
+    "answer": "A smaller LNG facility that receives LNG by truck or other transport, stores it, and vaporizes it for local distribution.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "What is boil-off gas?",
+    "answer": "Boil-off gas is vapor created when heat leaks into an LNG tank and causes some liquid LNG to evaporate.",
+    "status": ""
+  },
+  {
+    "category": "LNG Basics",
+    "question": "Why does LNG create boil-off gas even in insulated tanks?",
+    "answer": "No insulation is perfect. Small amounts of heat enter the tank over time, causing some LNG to vaporize.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "What does cryogenic mean?",
+    "answer": "Cryogenic refers to extremely low-temperature conditions, typically below about -150°C.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "Why are LNG systems considered cryogenic systems?",
+    "answer": "Because LNG is stored and handled at approximately -162°C.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "What material issue is critical in LNG service?",
+    "answer": "Material toughness at low temperature. Many carbon steels become brittle at cryogenic temperatures.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "Why is stainless steel commonly used in LNG service?",
+    "answer": "Austenitic stainless steels retain good toughness at cryogenic temperatures.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "What is thermal contraction?",
+    "answer": "Thermal contraction is the shrinking of materials as temperature decreases.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "Why does thermal contraction matter in LNG piping?",
+    "answer": "Large temperature swings can create high stresses, movement, leaks, or support problems if not accounted for.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "What is cold embrittlement?",
+    "answer": "Cold embrittlement is loss of ductility and toughness in a material at low temperature, increasing fracture risk.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "Why are cryogenic spills dangerous to concrete and steel?",
+    "answer": "Rapid cooling can crack concrete and embrittle unsuitable metals.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "Why do LNG lines need cooldown procedures?",
+    "answer": "Controlled cooldown limits thermal shock, excessive contraction, and mechanical stress.",
+    "status": ""
+  },
+  {
+    "category": "Cryogenics",
+    "question": "What is thermal shock?",
+    "answer": "Thermal shock is stress caused by rapid temperature change, which can damage equipment or piping.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is the primary personnel hazard from direct LNG contact?",
+    "answer": "Severe cryogenic burns or frostbite.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What PPE is commonly required for LNG handling?",
+    "answer": "Cryogenic gloves, face shield, eye protection, flame-resistant clothing, safety footwear, and other site-specific PPE.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is methane’s general flammable range in air?",
+    "answer": "Roughly 5% to 15% methane by volume in air, though exact values can vary with gas composition.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What does LEL stand for?",
+    "answer": "Lower Explosive Limit.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What does UEL stand for?",
+    "answer": "Upper Explosive Limit.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "Why can natural gas vapor from LNG be an asphyxiation hazard?",
+    "answer": "It can displace oxygen, especially in low areas, confined spaces, or poorly ventilated areas.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "Is methane heavier or lighter than air after it warms?",
+    "answer": "Methane is lighter than air after it warms, but very cold vapor near an LNG spill can initially stay low.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "Why can cold methane vapor initially travel along the ground?",
+    "answer": "Cold vapor is denser than warm air and can remain low until it warms and disperses.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is a vapor cloud?",
+    "answer": "A vapor cloud is a visible or invisible cloud of gas formed as LNG vaporizes and mixes with air.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What three things are needed for combustion?",
+    "answer": "Fuel, oxygen, and an ignition source.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is an ESD system?",
+    "answer": "Emergency Shutdown system. It safely stops flow or operation during abnormal or hazardous conditions.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is gas detection used for?",
+    "answer": "Gas detection identifies methane or other hazardous gas concentrations before they reach dangerous levels.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is flame detection used for?",
+    "answer": "Flame detection identifies fire quickly so shutdown, alarm, and suppression systems can activate.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "What is a hazardous area classification?",
+    "answer": "A classification system used to determine where flammable gas may exist and what electrical equipment is acceptable.",
+    "status": ""
+  },
+  {
+    "category": "Safety",
+    "question": "Why is ignition source control important at LNG facilities?",
+    "answer": "Vaporized natural gas can ignite if it is within the flammable range and contacts an ignition source.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "What is the function of an LNG storage tank?",
+    "answer": "To safely store LNG at cryogenic temperature while limiting heat ingress and controlling pressure.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "Why do LNG tanks have insulation?",
+    "answer": "Insulation reduces heat leak into the tank and limits boil-off gas generation.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "Why is LNG tank pressure monitored?",
+    "answer": "Boil-off gas can raise pressure, so monitoring helps maintain safe operating conditions.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "What is tank rollover?",
+    "answer": "Tank rollover is a rapid mixing event caused by stratified LNG layers, potentially causing sudden vapor generation and pressure rise.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "What causes stratification in an LNG tank?",
+    "answer": "Different LNG densities or compositions can form layers if new LNG is introduced without adequate mixing.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "Why is tank level measurement important?",
+    "answer": "It prevents overfill, supports inventory control, and helps manage operating limits.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "What is overfill protection?",
+    "answer": "Controls, alarms, and shutdowns designed to prevent filling a tank beyond its safe limit.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "What is secondary containment?",
+    "answer": "A containment system designed to hold LNG if the primary tank or piping releases liquid.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "Why is impoundment used around LNG storage?",
+    "answer": "To contain spills and limit the spread of LNG.",
+    "status": ""
+  },
+  {
+    "category": "Storage Tanks",
+    "question": "What is a full-containment LNG tank?",
+    "answer": "A tank system where both inner and outer containers are designed to contain LNG under specified conditions.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "What is the purpose of an LNG vaporizer?",
+    "answer": "To add heat to LNG and convert it back into natural gas.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "What is an ambient air vaporizer?",
+    "answer": "A vaporizer that uses heat from surrounding air to warm and vaporize LNG.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "What is a submerged combustion vaporizer?",
+    "answer": "A vaporizer that burns fuel to heat a water bath, which then heats LNG tubes.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "What is vaporizer outlet temperature?",
+    "answer": "The temperature of natural gas leaving the vaporizer after LNG has been warmed.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "Why must vaporizer outlet temperature be controlled?",
+    "answer": "Gas that is too cold can damage downstream piping, regulators, meters, or customer equipment.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "What can cause ice buildup on ambient vaporizers?",
+    "answer": "Moisture in the air freezes as heat is removed by the vaporizer.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "Why can vaporizer capacity drop in cold weather?",
+    "answer": "Ambient air vaporizers rely on environmental heat, which is reduced during cold, calm, or icy conditions.",
+    "status": ""
+  },
+  {
+    "category": "Vaporizers",
+    "question": "What is trim heating?",
+    "answer": "Additional heating used after primary vaporization to ensure gas reaches the required outlet temperature.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "Why is pipe material selection critical in LNG service?",
+    "answer": "Materials must tolerate cryogenic temperatures without brittle failure.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "What is a cryogenic valve?",
+    "answer": "A valve designed to operate safely at extremely low temperatures.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "Why do cryogenic valves often have extended bonnets?",
+    "answer": "Extended bonnets keep seals and packing warmer and away from the coldest liquid region.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "Why are expansion loops or flexibility needed in LNG piping?",
+    "answer": "They accommodate thermal contraction and expansion without overstressing the piping.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "What is trapped liquid expansion?",
+    "answer": "Pressure rise caused when liquid is trapped between closed valves and warms up.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "Why are thermal relief valves important in LNG piping?",
+    "answer": "They protect trapped liquid sections from dangerous pressure rise as LNG warms and expands.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "What is pipe support design expected to handle in LNG service?",
+    "answer": "Weight, thermal movement, vibration, wind/seismic loads, and low-temperature exposure.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "Why is insulation used on LNG piping?",
+    "answer": "To reduce heat gain, limit boil-off, protect personnel, and prevent excessive icing.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "What is a cold box?",
+    "answer": "An insulated enclosure containing cryogenic process equipment or piping.",
+    "status": ""
+  },
+  {
+    "category": "Piping",
+    "question": "What is purging?",
+    "answer": "Removing unwanted gas, air, moisture, or contaminants from equipment or piping before operation.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What does a gas distribution system do?",
+    "answer": "It transports natural gas from supply points to customers through regulated pipeline networks.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "Why is pressure regulation necessary in gas distribution?",
+    "answer": "To reduce and control gas pressure to levels suitable for downstream mains, services, or customers.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What is a regulator station?",
+    "answer": "A station that reduces and controls gas pressure between parts of the distribution system.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What is overpressure protection?",
+    "answer": "Equipment or control logic that prevents downstream pressure from exceeding safe limits.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What is a relief valve?",
+    "answer": "A valve that opens to discharge pressure when system pressure exceeds a setpoint.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What is a slam-shut valve?",
+    "answer": "A safety valve that rapidly closes when pressure goes above or below a defined limit.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What is odorization?",
+    "answer": "The addition of odorant to natural gas so leaks can be detected by smell.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "Why is odorization especially important after LNG vaporization?",
+    "answer": "LNG and methane are naturally odorless, so odorant is needed before gas enters public distribution systems.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "What is linepack?",
+    "answer": "The amount of gas stored within the pipeline system due to pressure and volume.",
+    "status": ""
+  },
+  {
+    "category": "Distribution",
+    "question": "Why does distribution demand vary by season?",
+    "answer": "Heating demand rises in cold weather, increasing gas usage.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What does SCADA stand for?",
+    "answer": "Supervisory Control and Data Acquisition.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is SCADA used for in LNG and gas distribution?",
+    "answer": "Remote monitoring and control of pressures, temperatures, flows, levels, alarms, valves, and equipment status.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is a pressure transmitter?",
+    "answer": "An instrument that measures pressure and sends a signal to a control or monitoring system.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is a temperature transmitter?",
+    "answer": "An instrument that measures temperature and transmits a signal for monitoring or control.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "Why are tank level alarms used?",
+    "answer": "To alert operators before the tank reaches high, high-high, low, or low-low operating limits.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is an interlock?",
+    "answer": "A control function that prevents or stops an action unless required safe conditions are met.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is a permissive?",
+    "answer": "A required condition that must be satisfied before equipment can start or operate.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is a cause-and-effect matrix?",
+    "answer": "A document showing how alarms, trips, detectors, and process conditions cause shutdowns or equipment actions.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "Why should LNG facilities have alarm rationalization?",
+    "answer": "To ensure alarms are meaningful, prioritized, and actionable rather than excessive or confusing.",
+    "status": ""
+  },
+  {
+    "category": "Instrumentation",
+    "question": "What is calibration?",
+    "answer": "Checking and adjusting an instrument so its output accurately represents the measured condition.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is cooldown?",
+    "answer": "A controlled process of gradually lowering equipment or piping temperature before LNG flow.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "Why should cooldown be gradual?",
+    "answer": "To reduce thermal shock and avoid excessive stress from rapid contraction.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is startup procedure control?",
+    "answer": "Following a defined sequence to bring equipment online safely and reliably.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is shutdown procedure control?",
+    "answer": "Following a defined sequence to safely stop flow, isolate equipment, and control pressure and temperature.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is normal operating pressure?",
+    "answer": "The pressure range where equipment or a system is intended to operate during normal conditions.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is MAOP?",
+    "answer": "Maximum Allowable Operating Pressure.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "Why is operating within MAOP critical?",
+    "answer": "Exceeding MAOP can violate design limits, regulations, and safety requirements.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is a lockout/tagout procedure?",
+    "answer": "A safety procedure to isolate hazardous energy before maintenance or inspection work.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is a confined space concern in LNG facilities?",
+    "answer": "Oxygen displacement, flammable atmosphere, poor ventilation, and limited access or egress.",
+    "status": ""
+  },
+  {
+    "category": "Operations",
+    "question": "What is management of change?",
+    "answer": "A formal process to review safety, technical, operating, and documentation impacts before changes are made.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "Why is preventive maintenance important in LNG facilities?",
+    "answer": "It reduces equipment failures, improves safety, and helps maintain regulatory compliance.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "What should be checked during valve maintenance?",
+    "answer": "Leakage, actuation, packing condition, position indication, corrosion, and correct operation.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "Why are relief valves periodically tested or inspected?",
+    "answer": "To confirm they open at the correct set pressure and can protect equipment from overpressure.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "Why is insulation inspection important?",
+    "answer": "Damaged insulation can increase heat leak, icing, corrosion risk, and personnel hazards.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "What is corrosion under insulation?",
+    "answer": "Corrosion that occurs beneath insulation when moisture enters and remains against metal surfaces.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "Why should gas detectors be bump tested or calibrated?",
+    "answer": "To verify that they respond correctly to gas and provide reliable alarms.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "Why are ESD valves tested?",
+    "answer": "To confirm they close when required and meet response-time expectations.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "What is proof testing?",
+    "answer": "Testing a safety function to confirm it operates as intended.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "Why should maintenance records be controlled?",
+    "answer": "They prove work was performed, support troubleshooting, and demonstrate compliance.",
+    "status": ""
+  },
+  {
+    "category": "Maintenance",
+    "question": "What is a critical spare?",
+    "answer": "A spare part whose absence could cause extended outage, safety risk, or major operational impact.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What is 49 CFR Part 193?",
+    "answer": "U.S. federal safety standards for LNG facilities used in transportation of gas by pipeline subject to federal pipeline safety laws.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What does PHMSA stand for?",
+    "answer": "Pipeline and Hazardous Materials Safety Administration.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What is NFPA 59A?",
+    "answer": "A standard for the production, storage, and handling of LNG, including fire protection, safety, operation, maintenance, and training requirements.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What does FERC regulate in LNG?",
+    "answer": "FERC regulates certain LNG terminal approvals and provides oversight for facilities under its jurisdiction.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "Why must engineers verify the applicable code edition?",
+    "answer": "Because adopted editions can differ by jurisdiction, project date, permit condition, or regulatory requirement.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What is API commonly associated with?",
+    "answer": "American Petroleum Institute standards and recommended practices used in oil and gas equipment, inspection, and operations.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What is ASME B31.3 commonly used for?",
+    "answer": "Process piping design, fabrication, examination, and testing.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What is ASME B31.8 commonly used for?",
+    "answer": "Gas transmission and distribution piping systems.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "What is a permit condition?",
+    "answer": "A requirement imposed by an approving authority that must be followed during construction or operation.",
+    "status": ""
+  },
+  {
+    "category": "Codes & Standards",
+    "question": "Why should design basis documents reference codes and assumptions?",
+    "answer": "They establish the engineering requirements, limits, and rationale used for design decisions.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What should you check first when reviewing an LNG system modification?",
+    "answer": "Design basis, operating conditions, code requirements, safety impacts, interfaces, and management-of-change requirements.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "Why is interface management important?",
+    "answer": "LNG facilities connect process, mechanical, electrical, controls, civil, safety, and operations systems.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What is a design basis?",
+    "answer": "The set of assumptions, criteria, loads, codes, operating conditions, and performance requirements used for design.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What is a P&ID?",
+    "answer": "A piping and instrumentation diagram showing equipment, piping, valves, instruments, controls, and safety functions.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "Why are P&IDs critical for LNG engineers?",
+    "answer": "They show how the process works, how equipment is isolated, how controls function, and how safety systems interact.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What is a HAZOP?",
+    "answer": "Hazard and Operability Study. A structured review of process deviations and their causes, consequences, safeguards, and recommendations.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What is LOPA?",
+    "answer": "Layer of Protection Analysis. A method to evaluate whether safeguards adequately reduce risk.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What is a safeguard?",
+    "answer": "A device, procedure, design feature, or system that reduces the likelihood or consequence of a hazard.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "What is a single-point failure?",
+    "answer": "A failure of one component that can cause loss of a critical function.",
+    "status": ""
+  },
+  {
+    "category": "Engineering Judgment",
+    "question": "Why should engineers question assumptions in old drawings?",
+    "answer": "Drawings may be outdated, field changes may not be captured, and actual installed conditions may differ.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "What is the first priority during an LNG emergency?",
+    "answer": "Protect life and prevent escalation.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "What should operators do during a suspected LNG leak?",
+    "answer": "Follow site emergency procedures, isolate if safe, activate alarms/ESD as required, evacuate or restrict access, and notify emergency response.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "Why should responders avoid applying water directly to an LNG pool unless procedures allow it?",
+    "answer": "Water can increase vaporization rate and potentially worsen vapor cloud formation.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "What is vapor dispersion?",
+    "answer": "The spreading and dilution of gas vapor into the atmosphere.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "Why is wind direction important during an LNG release?",
+    "answer": "It affects where the vapor cloud may travel and where personnel should evacuate or stage.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "What is an exclusion zone?",
+    "answer": "An area restricted to protect people from hazards such as fire, vapor clouds, or cryogenic exposure.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "What is emergency isolation?",
+    "answer": "Stopping flow or closing valves to limit release quantity and prevent escalation.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "Why are drills important at LNG facilities?",
+    "answer": "They build familiarity with procedures, roles, communication, evacuation, and emergency equipment.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "What is incident command?",
+    "answer": "A structured system for managing emergency response roles, decisions, resources, and communications.",
+    "status": ""
+  },
+  {
+    "category": "Emergency Response",
+    "question": "Why should LNG emergency plans involve local responders?",
+    "answer": "Local responders need to understand LNG hazards, site layout, access points, and response strategy before an incident.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "Why is flow measurement important in LNG distribution?",
+    "answer": "It supports custody transfer, inventory, demand planning, process control, and operational monitoring.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "What is custody transfer?",
+    "answer": "Measurement used for commercial transfer of product between parties.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "Why does gas composition matter?",
+    "answer": "Composition affects heating value, density, flammability, vaporization behavior, and custody transfer calculations.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "What is heating value?",
+    "answer": "The amount of energy released when a volume or mass of gas is burned.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "What is Wobbe Index?",
+    "answer": "A fuel gas interchangeability measure related to heating value and specific gravity.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "Why is temperature compensation used in gas measurement?",
+    "answer": "Gas volume changes with temperature, so compensation improves measurement accuracy.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "Why is pressure compensation used in gas measurement?",
+    "answer": "Gas volume changes with pressure, so compensation improves standard-volume calculations.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "What is a gas chromatograph used for?",
+    "answer": "Measuring gas composition so heating value and other properties can be calculated.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "What is standard cubic foot measurement?",
+    "answer": "A gas volume normalized to standard pressure and temperature conditions.",
+    "status": ""
+  },
+  {
+    "category": "Measurement",
+    "question": "Why should meters have upstream and downstream piping requirements?",
+    "answer": "Flow profile affects accuracy; straight runs or flow conditioners may be required.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is an engineering package?",
+    "answer": "A collection of drawings, calculations, specifications, data sheets, procedures, and supporting documents for a project or modification.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is a datasheet?",
+    "answer": "A document listing technical requirements and operating conditions for equipment or instruments.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is a line list?",
+    "answer": "A table of piping lines showing service, size, material, pressure, temperature, insulation, and related details.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is a valve list?",
+    "answer": "A table of valves including tag, type, size, rating, material, service, and other details.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is a tie-in?",
+    "answer": "A connection point where new piping or equipment is connected to an existing system.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "Why are tie-ins high-risk work?",
+    "answer": "They involve existing systems, isolation, pressure, energy control, service interruption, and field-condition uncertainty.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is commissioning?",
+    "answer": "The process of verifying that systems are installed, tested, functional, and ready for safe operation.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is pre-commissioning?",
+    "answer": "Activities such as cleaning, flushing, pressure testing, inspections, and checks before introducing process fluid.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is a punch list?",
+    "answer": "A list of incomplete, deficient, or corrective items that must be resolved before acceptance or operation.",
+    "status": ""
+  },
+  {
+    "category": "Project Work",
+    "question": "What is redlining?",
+    "answer": "Marking changes on drawings to reflect field modifications or as-built conditions.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "You see unexpected frost on a valve body. What could it indicate?",
+    "answer": "Possible cold fluid flow, leaking valve, failed insulation, trapped LNG, or abnormal operating condition.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "A vaporizer outlet temperature is lower than expected. What could cause it?",
+    "answer": "Insufficient heat input, icing, excessive flow, low ambient temperature, fouling, control issue, or sensor error.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "A tank pressure is rising faster than normal. What should be considered?",
+    "answer": "Increased heat leak, high filling activity, rollover risk, vent/BOG system issue, blocked outlet, control failure, or abnormal boil-off.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "A gas detector alarms near LNG equipment. What is the engineering mindset?",
+    "answer": "Treat it as real until proven otherwise, follow emergency procedures, check trends, confirm with portable detection if allowed, and identify the source safely.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "A pressure relief valve is lifting repeatedly. What could be wrong?",
+    "answer": "Actual overpressure, wrong setpoint, leaking seat, control instability, thermal expansion, blocked downstream path, or undersized system.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "A cryogenic line support is damaged. Why is this serious?",
+    "answer": "Improper support can create stress, movement, vibration, misalignment, leakage, or failure during thermal contraction.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "You find an undocumented valve in the field. What should you do?",
+    "answer": "Do not assume its function. Verify against field conditions, P&IDs, tags, operations input, and update documentation through formal process.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "A pressure transmitter reading disagrees with a local gauge. What should you check?",
+    "answer": "Instrument calibration, impulse line condition, valve position, location, process conditions, gauge accuracy, and SCADA scaling.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "An LNG truck unloading line is not cooling down evenly. What might be happening?",
+    "answer": "Restricted flow, trapped vapor, valve misposition, insulation issue, poor procedure execution, or instrumentation error.",
+    "status": ""
+  },
+  {
+    "category": "Field Scenarios",
+    "question": "An operator reports unusual noise in piping during startup. What could it indicate?",
+    "answer": "Rapid vaporization, two-phase flow, water hammer-like effects, thermal movement, vibration, or improper valve sequencing.",
+    "status": ""
+  }
+];
 
     let cards = JSON.parse(localStorage.getItem("lngKnowledgeDeck")) || starterCards;
     let activeDeck = [...cards];
