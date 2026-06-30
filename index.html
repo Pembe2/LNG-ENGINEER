@@ -31,6 +31,20 @@
       color: #d9e2ec;
     }
 
+    .topbar {
+      background: #0b1f33;
+      color: white;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar-title {
+      font-weight: bold;
+    }
+
     main {
       max-width: 1100px;
       margin: 0 auto;
@@ -57,7 +71,7 @@
       color: #102a43;
     }
 
-    .toolbar, .panel {
+    .panel {
       background: white;
       border-radius: 14px;
       padding: 16px;
@@ -65,12 +79,34 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
 
-    input, select, textarea, button {
+    .mode-grid, .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .mode-card, .category-card {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      border: 2px solid transparent;
+    }
+
+    .mode-card:hover, .category-card:hover {
+      border-color: #2673d9;
+    }
+
+    .mode-card h3, .category-card h3 {
+      margin: 0 0 8px;
+    }
+
+    input, textarea, button {
       font-size: 16px;
       padding: 10px;
       border-radius: 10px;
       border: 1px solid #bcccdc;
-      margin: 4px;
+      margin: 4px 0;
     }
 
     input, textarea {
@@ -90,40 +126,22 @@
     button.bad { background: #c92a2a; }
     button.light { background: #d9e2ec; color: #102a43; }
 
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
+    .study-wrap {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 24px;
     }
 
-    .category-card {
+    .study-card {
       background: white;
-      border-radius: 14px;
-      padding: 16px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-      cursor: pointer;
-      border: 2px solid transparent;
-    }
-
-    .category-card:hover {
-      border-color: #2673d9;
-    }
-
-    .category-card h3 {
-      margin: 0 0 8px;
-    }
-
-    .flashcard {
-      background: white;
-      border-radius: 18px;
-      padding: 30px;
-      min-height: 260px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      border-radius: 22px;
+      padding: 34px;
+      min-height: 320px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.14);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .tag {
@@ -135,74 +153,80 @@
     }
 
     .card-text {
-      font-size: 28px;
+      font-size: 30px;
       line-height: 1.35;
     }
 
-    .controls {
-      text-align: center;
-      margin-bottom: 20px;
+    .study-controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
     }
 
     .hidden {
       display: none;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
     @media (max-width: 700px) {
-      .two-col {
-        grid-template-columns: 1fr;
+      .card-text {
+        font-size: 23px;
       }
 
-      .card-text {
-        font-size: 22px;
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
   </style>
 </head>
 <body>
-  <header>
+  <header id="mainHeader">
     <h1>LNG Knowledge Deck</h1>
-    <p>Flashcards for LNG distribution engineering, operations, safety, and field judgment</p>
+    <p>Build your LNG distribution engineering knowledge base</p>
   </header>
 
-  <main>
+  <div id="studyTopbar" class="topbar hidden">
+    <div class="topbar-title" id="studyTitle">Study Mode</div>
+    <button class="light" onclick="goHome()">Back to Dashboard</button>
+  </div>
+
+  <main id="dashboardPage">
     <section class="stats">
       <div class="stat"><strong id="totalCards">0</strong>Total Cards</div>
       <div class="stat"><strong id="knownCards">0</strong>Known</div>
       <div class="stat"><strong id="reviewCards">0</strong>Needs Review</div>
-      <div class="stat"><strong id="activeCards">0</strong>Current Deck</div>
+      <div class="stat"><strong id="unmarkedCards">0</strong>Unmarked</div>
     </section>
 
-    <section class="toolbar">
-      <button onclick="setMode('all')">All Cards</button>
-      <button onclick="setMode('review')" class="bad">Needs Review</button>
-      <button onclick="shuffleDeck()" class="secondary">Shuffle</button>
-      <button onclick="resetProgress()" class="light">Reset Progress</button>
+    <section class="panel">
+      <h2>Study Modes</h2>
+      <div class="mode-grid">
+        <div class="mode-card">
+          <h3>All Cards</h3>
+          <p>Study the full LNG knowledge deck.</p>
+          <button onclick="startDeck('all')">Start Deck</button>
+        </div>
+
+        <div class="mode-card">
+          <h3>Needs Review</h3>
+          <p>Only study cards you marked for review.</p>
+          <button class="bad" onclick="startDeck('review')">Start Review</button>
+        </div>
+
+        <div class="mode-card">
+          <h3>Random Quiz</h3>
+          <p>Shuffle the full deck and test yourself.</p>
+          <button class="secondary" onclick="startDeck('random')">Start Random</button>
+        </div>
+      </div>
+
       <input id="searchInput" placeholder="Search cards..." oninput="searchCards()" />
+      <button class="light" onclick="resetProgress()">Reset Progress</button>
     </section>
 
     <section>
       <h2>Study by Category</h2>
       <div id="categoryGrid" class="category-grid"></div>
-    </section>
-
-    <section class="flashcard">
-      <div class="tag" id="cardTag">Choose a deck</div>
-      <div class="card-text" id="cardText">Pick a category or study mode to begin.</div>
-    </section>
-
-    <section class="controls">
-      <button onclick="previousCard()" class="secondary">Previous</button>
-      <button onclick="flipCard()">Show Answer</button>
-      <button onclick="markKnown()" class="good">I Know This</button>
-      <button onclick="markReview()" class="bad">Needs Review</button>
-      <button onclick="nextCard()" class="secondary">Next</button>
     </section>
 
     <section class="panel">
@@ -218,6 +242,23 @@
       <button onclick="exportDeck()">Export Deck</button>
       <input type="file" id="importFile" onchange="importDeck(event)" />
     </section>
+  </main>
+
+  <main id="studyPage" class="hidden">
+    <div class="study-wrap">
+      <section class="study-card">
+        <div class="tag" id="cardTag">Choose a deck</div>
+        <div class="card-text" id="cardText">Pick a deck to begin.</div>
+      </section>
+
+      <section class="study-controls">
+        <button class="secondary" onclick="previousCard()">Previous</button>
+        <button onclick="flipCard()" id="flipButton">Show Answer</button>
+        <button class="good" onclick="markKnown()">I Know This</button>
+        <button class="bad" onclick="markReview()">Needs Review</button>
+        <button class="secondary" onclick="nextCard()">Next</button>
+      </section>
+    </div>
   </main>
 
   <script>
@@ -288,7 +329,6 @@
     let activeDeck = [...cards];
     let currentIndex = 0;
     let showingAnswer = false;
-    let currentMode = "all";
 
     function saveDeck() {
       localStorage.setItem("lngKnowledgeDeck", JSON.stringify(cards));
@@ -298,7 +338,7 @@
       document.getElementById("totalCards").textContent = cards.length;
       document.getElementById("knownCards").textContent = cards.filter(c => c.status === "Known").length;
       document.getElementById("reviewCards").textContent = cards.filter(c => c.status === "Needs Review").length;
-      document.getElementById("activeCards").textContent = activeDeck.length;
+      document.getElementById("unmarkedCards").textContent = cards.filter(c => !c.status).length;
     }
 
     function buildCategories() {
@@ -310,67 +350,77 @@
       categories.forEach(category => {
         const count = cards.filter(c => c.category === category).length;
         const review = cards.filter(c => c.category === category && c.status === "Needs Review").length;
+        const known = cards.filter(c => c.category === category && c.status === "Known").length;
 
         const div = document.createElement("div");
         div.className = "category-card";
-        div.onclick = () => setCategory(category);
         div.innerHTML = `
           <h3>${category}</h3>
           <p>${count} cards</p>
-          <p>${review} need review</p>
+          <p>${known} known | ${review} need review</p>
+          <button onclick="startCategory('${category.replace(/'/g, "\\'")}')">Start Deck</button>
         `;
+
         grid.appendChild(div);
       });
     }
 
-    function renderCard() {
+    function renderDashboard() {
       updateStats();
       buildCategories();
-
-      if (activeDeck.length === 0) {
-        document.getElementById("cardTag").textContent = "No cards found";
-        document.getElementById("cardText").textContent = "Try another category, search term, or add more cards.";
-        return;
-      }
-
-      const card = activeDeck[currentIndex];
-
-      document.getElementById("cardTag").textContent =
-        `${card.category} | Card ${currentIndex + 1} of ${activeDeck.length} | ${card.status || "Unmarked"}`;
-
-      document.getElementById("cardText").textContent =
-        showingAnswer ? card.answer : card.question;
     }
 
-    function setMode(mode) {
-      currentMode = mode;
+    function showStudyPage(title) {
+      document.getElementById("mainHeader").classList.add("hidden");
+      document.getElementById("dashboardPage").classList.add("hidden");
+      document.getElementById("studyPage").classList.remove("hidden");
+      document.getElementById("studyTopbar").classList.remove("hidden");
+      document.getElementById("studyTitle").textContent = title;
+      renderCard();
+    }
+
+    function goHome() {
+      document.getElementById("mainHeader").classList.remove("hidden");
+      document.getElementById("dashboardPage").classList.remove("hidden");
+      document.getElementById("studyPage").classList.add("hidden");
+      document.getElementById("studyTopbar").classList.add("hidden");
       showingAnswer = false;
+      renderDashboard();
+    }
+
+    function startDeck(mode) {
       currentIndex = 0;
+      showingAnswer = false;
 
       if (mode === "all") {
         activeDeck = [...cards];
+        showStudyPage("All Cards");
       }
 
       if (mode === "review") {
         activeDeck = cards.filter(c => c.status === "Needs Review");
+        showStudyPage("Needs Review");
       }
 
-      renderCard();
+      if (mode === "random") {
+        activeDeck = [...cards];
+        shuffleArray(activeDeck);
+        showStudyPage("Random Quiz");
+      }
     }
 
-    function setCategory(category) {
-      currentMode = category;
-      activeDeck = cards.filter(c => c.category === category);
+    function startCategory(category) {
       currentIndex = 0;
       showingAnswer = false;
-      renderCard();
+      activeDeck = cards.filter(c => c.category === category);
+      showStudyPage(category);
     }
 
     function searchCards() {
       const term = document.getElementById("searchInput").value.toLowerCase().trim();
 
       if (!term) {
-        setMode("all");
+        buildCategories();
         return;
       }
 
@@ -382,7 +432,29 @@
 
       currentIndex = 0;
       showingAnswer = false;
-      renderCard();
+      showStudyPage(`Search: ${term}`);
+    }
+
+    function renderCard() {
+      updateStats();
+
+      if (activeDeck.length === 0) {
+        document.getElementById("cardTag").textContent = "No cards found";
+        document.getElementById("cardText").textContent = "Go back to the dashboard and choose another deck or add more cards.";
+        document.getElementById("flipButton").textContent = "Show Answer";
+        return;
+      }
+
+      const card = activeDeck[currentIndex];
+
+      document.getElementById("cardTag").textContent =
+        `${card.category} | Card ${currentIndex + 1} of ${activeDeck.length} | ${card.status || "Unmarked"}`;
+
+      document.getElementById("cardText").textContent =
+        showingAnswer ? card.answer : card.question;
+
+      document.getElementById("flipButton").textContent =
+        showingAnswer ? "Show Question" : "Show Answer";
     }
 
     function flipCard() {
@@ -429,23 +501,18 @@
       nextCard();
     }
 
-    function shuffleDeck() {
-      for (let i = activeDeck.length - 1; i > 0; i--) {
+    function shuffleArray(deck) {
+      for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [activeDeck[i], activeDeck[j]] = [activeDeck[j], activeDeck[i]];
+        [deck[i], deck[j]] = [deck[j], deck[i]];
       }
-
-      currentIndex = 0;
-      showingAnswer = false;
-      renderCard();
     }
 
     function resetProgress() {
       if (!confirm("Reset all Known and Needs Review markings?")) return;
-
       cards.forEach(card => card.status = "");
       saveDeck();
-      setMode("all");
+      renderDashboard();
     }
 
     function addCard() {
@@ -465,7 +532,7 @@
       document.getElementById("newQuestion").value = "";
       document.getElementById("newAnswer").value = "";
 
-      setCategory(category);
+      renderDashboard();
     }
 
     function exportDeck() {
@@ -503,7 +570,7 @@
           }));
 
           saveDeck();
-          setMode("all");
+          renderDashboard();
           alert("Deck imported successfully.");
         } catch {
           alert("Import failed. Make sure the file is valid JSON.");
@@ -513,7 +580,7 @@
       reader.readAsText(file);
     }
 
-    renderCard();
+    renderDashboard();
   </script>
 </body>
 </html>
